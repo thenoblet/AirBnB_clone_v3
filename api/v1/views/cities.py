@@ -130,8 +130,7 @@ def update_city(city_id):
         abort(400, "Not a JSON")
 
     for key, value in data.items():
-        keys = ['id', 'state_id', 'created_at', 'updated_at']
-        if key not in keys:
+        if key not in ['id', 'state_id', 'created_at', 'updated_at']:
             setattr(city, key, value)
 
     city.save()
