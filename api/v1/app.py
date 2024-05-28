@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 
-""" App routing module """
+""" App routing module for all APIs"""
 
 import os
 from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
-
 
 @app.teardown_appcontext
 def teardown_session(self):
