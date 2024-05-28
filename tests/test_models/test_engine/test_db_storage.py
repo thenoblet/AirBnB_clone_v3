@@ -13,7 +13,7 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-from models.user import User
+from models.user import User]
 import json
 import os
 import pep8
@@ -83,6 +83,47 @@ class TestFileStorage(unittest.TestCase):
     def test_new(self):
         """test that new adds an object to the database"""
 
-    @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
+    @unittest.skipIf(models.s]torage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get(self):
+        """
+        This is a test that retrieves objects from the file.json.
+        """
+
+        # Create a new state 'Accra' and save it to storage
+        state = State(name='Accra')
+        models.storage.new(state)
+        models.storage.save()
+
+        # Retrieve the state object using its ID
+        state_object = models.storage.get(State, state.id)
+
+        # Verify that the retrieved object is the same as the created object
+        self.assertEqual(state, state_object)
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """
+        This is a test that counts objects from the file.json.
+        """
+
+        # Count all instances in the storage using the all() method
+        objects_from_all = len(models.storage.all())
+
+        # Count all objects in the storage using the count() method
+        objects_from_count = models.storage.count()
+
+        # Verify that both counts are equall when compared
+        self.assertEqual(objects_from_all, objects_from_count)
+
+        # Count State instances in the storage using the all() method
+        states_from_all = len(models.storage.all(State))
+
+        # Count State instances in the storage using the count() method
+        states_from_count = models.storage.count(State)
+
+        # Verify that both counts are equall when compared
+        self.assertEqual(states_from_all, states_from_count)
