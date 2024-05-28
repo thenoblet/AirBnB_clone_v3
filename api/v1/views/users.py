@@ -13,7 +13,7 @@ def get_all_users():
     Retrieve the list of all User objects.
 
     Returns:
-        A JSON response containing all User objects.
+    A JSON response containing all User objects.
     '''
     all_users = storage.all(User)
     all_users_dict = [user.to_dict() for user in all_users.values()]
