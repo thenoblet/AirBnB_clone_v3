@@ -63,12 +63,8 @@ class FileStorage:
         if cls_name is None or id is None:
             return None
 
-        cls = classes.get(cls_name)
-        if cls:
-            key = f"{cls.__name__}.{id}"
-            return self.__objects.get(key)
-
-        return None
+        key = f"{cls.__name__}.{id}"
+        return self.__objects.get(key)
 
     def count(self, cls_name=None):
         """
