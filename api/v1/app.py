@@ -8,6 +8,7 @@ from models import storage
 from api.v1.views import app_views
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 app.register_blueprint(app_views)
 
 
@@ -25,7 +26,7 @@ def teardown_session(self):
 
 @app.errorhandler(404)
 def page_not_found(error):
-    """Handles 404 errors (Not Found)."""
+    """Handles 404 errors for page not found."""
     data = {"error": "Not found"}
     return jsonify(data), 404
 
