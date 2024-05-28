@@ -60,7 +60,7 @@ class FileStorage:
 
     def get(self, cls_name=None, id=None):
         """ Retrieve an instance of a specified class by its ID. """
-        if None in [cls_name, id]:
+        if cls_name is None or id is None:
             return None
 
         key = f"{cls_name.__name__}.{id}"
