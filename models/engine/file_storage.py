@@ -59,20 +59,33 @@ class FileStorage:
             pass
 
     def get(self, cls_name=None, id=None):
+        """ Retrieve an instance of a specified class by its ID. """
         if cls_name and id:
             cls = classes.get(cls_name)
             if cls:
-                key = f"{cls_name.__name__}.{id}"
+                key = f"{cls.__name__}.{id}"
                 return self.__objects.get(key)
         return None
 
     def count(self, cls_name=None):
+        """
+        Count the number of instances of a specified class or all classes
+        if no class name is provided.
+
+        Args:
+             cls_name (str, optional): The name of the class type to count
+             instances of. Defaults to None.
+             
+        Returns:
+             int: The number of instances of the specified class, or the total number
+             of instances if no class name is provided.
+        
         if cls_name:
             cls = classes.get(cls_name)
             if cls:
                 return len(self.all(cls))
-
-        return len(self.all())
+        """
+        return len(self.all(cls_name))
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
