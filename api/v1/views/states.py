@@ -5,14 +5,9 @@ Routes for managing State objects and operations.
 from flask import jsonify, abort, request
 from api.v1.views import app_views, storage
 from models.state import State
-from flask import Flask
-
-app = Flask(__name__)
-
-app.url_map.strict_slashes = False
 
 
-@app_views.route('/states', methods=['GET'])
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_all_states():
     '''
     Retrieve all State objects.
@@ -20,14 +15,12 @@ def get_all_states():
     Returns:
     A JSON response containing all State objects.
     '''
-    all_states_json = []
     all_states = storage.all(State)
-    for state_instance in all_states.values():
-        all_states_json.append(state_instance.to_json())
+    all_states_dict = [state.to_dict() for state in all_states.values()]
     return jsonify(all_states_json)
 
 
-@app_views.route("/states", methods=["POST"])
+@app_views.route("/states", methods=["POST"], strict_slashes=False)
 def create_state():
     '''
     Create a new State object.
@@ -37,7 +30,7 @@ def create_state():
     '''
     request_data = request.get_json(silent=True)
     if request_data is None:
-        abort(400, 'Invalid JSON')
+        abort(400, 'Not a JSON')
     if "name" not in request_data:
         abort(400, 'Missing name')
 
@@ -48,7 +41,7 @@ def create_state():
     return response
 
 
-@app_views.route("/states/<state_id>", methods=["GET"])
+@app_views.route("/states/<state_id>", methods=["GET"], strict_slashes=False)
 def get_state_by_id(state_id):
     '''
     Retrieve a specific State object by ID.
@@ -66,7 +59,7 @@ def get_state_by_id(state_id):
     return jsonify(state_instance.to_json())
 
 
-@app_views.route("/states/<state_id>", methods=["PUT"])
+@app_views.route("/states/<state_id>", methods=["PUT"], strict_slashes=False)
 def update_state(state_id):
     '''
     Update a specific State object by ID.
@@ -81,7 +74,7 @@ def update_state(state_id):
     '''
     request_data = request.get_json(silent=True)
     if request_data is None:
-        abort(400, 'Invalid JSON')
+        abort(400, 'Not a JSON')
     state_instance = storage.get(State, state_id)
     if state_instance is None:
         abort(404)
@@ -92,7 +85,8 @@ def update_state(state_id):
     return jsonify(state_instance.to_json())
 
 
-@app_views.route("/states/<state_id>", methods=["DELETE"])
+@app_views.route("/states/<state_id>", methods=["DELETE"],
+                 strict_slashes=False)
 def delete_state_by_id(state_id):
     '''
     Delete a State object by ID.
