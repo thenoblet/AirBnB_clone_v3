@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" App routing module for all APIs"""
+"""App routing module for all APIs in the flask app """
 
 import os
 from flask import Flask, jsonify
