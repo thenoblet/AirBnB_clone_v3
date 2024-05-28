@@ -60,12 +60,15 @@ class FileStorage:
 
     def get(self, cls_name=None, id=None):
         """ Retrieve an instance of a specified class by its ID. """
-        if cls_name and id:
-            cls = classes.get(cls_name)
-            if cls:
-                key = f"{cls.__name__}.{id}"
-                return self.__objects.get(key)
-        return None
+        if cls_name is None or id is None:
+            return None
+
+        cls = classes.get(cls_name)
+        if cls:
+            key = f"{cls.__name__}.{id}"
+            return self.__objects.get(key)
+    
+         return None
 
     def count(self, cls_name=None):
         """
