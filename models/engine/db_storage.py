@@ -64,12 +64,12 @@ class DBStorage:
         if obj is not None:
             self.__session.delete(obj)
 
-    def get(self, cls_name=None, id=None):
+    def get(self, cls=None, id=None):
         """
         Retrieve an instance of a specified class by its ID.
 
         Args:
-            cls_name (str, optional): The name of the class type of the
+            cls (str, optional): The name of the class type of the
             instance to be retrieved. Defaults to None.
             id (str, optional): The ID of the instance to retrieve.
 
@@ -78,9 +78,7 @@ class DBStorage:
             given ID if found, otherwise None.
         """
         if cls_name and id:
-            # cls = classes.get(cls_name)
-            #if cls:
-           return self.__session.query(cls_name).filter(cls_name.id == id).first()
+            return self.__session.query(cls).filter(cls.id == id).first()
         return None
 
     def count(self, cls_name=None):
@@ -90,14 +88,9 @@ class DBStorage:
         Args:
             cls_name (str, optional): The name of the class type
             to count instances of.
-            
+
         Returns:
             int: The number of instances of the specified class.
-        
-        if cls_name:
-            cls = classes.get(cls_name)
-            if cls:
-                return len(self.all(cls)
         """
         return len(self.all(cls_name))
 

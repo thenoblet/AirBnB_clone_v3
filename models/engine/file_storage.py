@@ -67,8 +67,8 @@ class FileStorage:
         if cls:
             key = f"{cls.__name__}.{id}"
             return self.__objects.get(key)
-    
-         return None
+
+        return None
 
     def count(self, cls_name=None):
         """
@@ -76,17 +76,12 @@ class FileStorage:
         if no class name is provided.
 
         Args:
-             cls_name (str, optional): The name of the class type to count
-             instances of. Defaults to None.
-             
+            cls_name (str, optional): The name of the class type to count
+            instances of. Defaults to None.
+
         Returns:
-             int: The number of instances of the specified class, or the total number
-             of instances if no class name is provided.
-        
-        if cls_name:
-            cls = classes.get(cls_name)
-            if cls:
-                return len(self.all(cls))
+            int: The number of instances of the specified class, or the total
+            number of instances if no class name is provided.
         """
         return len(self.all(cls_name))
 
