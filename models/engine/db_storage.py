@@ -64,6 +64,43 @@ class DBStorage:
         if obj is not None:
             self.__session.delete(obj)
 
+    def get(self, cls_name=None, id=None):
+        """
+        Retrieve an instance of a specified class by its ID.
+
+        Args:
+            cls_name (str, optional): The name of the class type of the
+            instance to be retrieved. Defaults to None.
+            id (str, optional): The ID of the instance to retrieve.
+
+        Returns:
+            object or None: The instance of the specified class with the
+            given ID if found, otherwise None.
+        """
+        if cls_name and id:
+            cls = classes.get(cls_name)
+            if cls:
+                return self.__session.query(cls).filter(cls.id == id).first()
+        return None
+
+    def count(self, cls_name=None):
+        """
+        Count the number of instances of a specified class.
+
+        Args:
+            cls_name (str, optional): The name of the class type
+            to count instances of.
+
+        Returns:
+            int: The number of instances of the specified class.
+        """
+        if cls_name:
+            cls = classes.get(cls_name)
+            if cls:
+                return len(self.all(cls))
+
+        return len(self.all())
+
     def reload(self):
         """reloads data from the database"""
         Base.metadata.create_all(self.__engine)
