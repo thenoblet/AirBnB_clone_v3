@@ -78,9 +78,9 @@ class DBStorage:
             given ID if found, otherwise None.
         """
         if cls_name and id:
-            cls = classes.get(cls_name)
-            if cls:
-                return self.__session.query(cls).filter(cls.id == id).first()
+            # cls = classes.get(cls_name)
+            #if cls:
+           return self.__session.query(cls_name).filter(cls_name.id == id).first()
         return None
 
     def count(self, cls_name=None):
