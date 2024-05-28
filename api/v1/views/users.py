@@ -3,8 +3,9 @@
 Routes for managing User objects and operations.
 '''
 from flask import jsonify, abort, request
-from api.v1.views import app_views, storage
+from api.v1.views import app_views
 from models.user import User
+from models import storage
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
