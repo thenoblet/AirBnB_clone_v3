@@ -93,13 +93,13 @@ class DBStorage:
 
         Returns:
             int: The number of instances of the specified class.
-        """
+        
         if cls_name:
             cls = classes.get(cls_name)
             if cls:
                 return len(self.all(cls))
-
-        return len(self.all())
+           """
+        return len(self.all(cls_name))
 
     def reload(self):
         """reloads data from the database"""
