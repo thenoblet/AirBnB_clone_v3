@@ -17,7 +17,7 @@ def get_all_states():
     '''
     all_states = storage.all(State)
     all_states_dict = [state.to_dict() for state in all_states.values()]
-    return jsonify(all_states_json)
+    return jsonify(all_states_dict)
 
 
 @app_views.route("/states", methods=["POST"], strict_slashes=False)
@@ -36,7 +36,7 @@ def create_state():
 
     new_state = State(**request_data)
     new_state.save()
-    response = jsonify(new_state.to_json())
+    response = jsonify(new_state.to_dict())
     response.status_code = 201
     return response
 
@@ -56,7 +56,7 @@ def get_state_by_id(state_id):
     state_instance = storage.get(State, state_id)
     if state_instance is None:
         abort(404)
-    return jsonify(state_instance.to_json())
+    return jsonify(state_instance.to_dict())
 
 
 @app_views.route("/states/<state_id>", methods=["PUT"], strict_slashes=False)
@@ -82,7 +82,7 @@ def update_state(state_id):
         if key not in ["id", "created_at", "updated_at"]:
             setattr(state_instance, key, value)
     state_instance.save()
-    return jsonify(state_instance.to_json())
+    return jsonify(state_instance.to_dict())
 
 
 @app_views.route("/states/<state_id>", methods=["DELETE"],
