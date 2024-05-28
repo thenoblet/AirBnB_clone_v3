@@ -77,7 +77,7 @@ class DBStorage:
             object or None: The instance of the specified class with the
             given ID if found, otherwise None.
         """
-        if cls_name and id:
+        if cls and id:
             return self.__session.query(cls).filter(cls.id == id).first()
         return None
 
