@@ -3,7 +3,7 @@
 """ App routing module """
 
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
@@ -22,6 +22,11 @@ def teardown_session(self):
     """
     storage.close()
 
+@app.errorhandler(404)
+def page_not_found(error):
+    """Handles 404 errors (Not Found)."""
+    data = {"error": "Not found"}
+    return jsonify(data), 404
 
 if __name__ == "__main__":
     app.run(
