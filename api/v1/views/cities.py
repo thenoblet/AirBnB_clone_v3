@@ -97,7 +97,7 @@ def create_city(state_id):
         abort(404)
 
     data = request.get_json(force=True, silent=True, cache=False)
-    if data is None:
+    if not data:
         abort(400, "Not a JSON")
 
     if "name" not in data:
@@ -125,14 +125,14 @@ def update_city(city_id):
     if city is None:
         abort(404)
 
-    data = resquest.get_json(force=True, silent=True, cache=False)
-    if data is None:
+    data = request.get_json(force=True, silent=True, cache=False)
+    if not data:
         abort(400, "Not a JSON")
 
-    keys = ['id', 'state_id', 'created_at', 'updated_at']
     for key, value in data.items():
+        keys = ['id', 'state_id', 'created_at', 'updated_at']
         if key not in keys:
             setattr(city, key, value)
 
-    storage.save()
+    city.save()
     return jsonify(city.to_dict()), 200
