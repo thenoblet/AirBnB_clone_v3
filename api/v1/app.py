@@ -16,11 +16,7 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def teardown_session(self):
     """
-    Remove the current SQLAlchemy Session after each request.
-
-    This function is registered to be called after each request to ensure
-    that the SQLAlchemy Session is properly closed,
-    preventing any potential resource leaks.
+    Remove the current SQLAlchemy Session after each request..
     """
     storage.close()
 
