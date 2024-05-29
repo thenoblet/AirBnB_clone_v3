@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""App routing module for all APIs in the flask app """
+""" App routing module for all APIs in the Flask app """
 
 import os
 from flask import Flask, jsonify
@@ -14,14 +14,25 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def teardown_session(self):
     """
-    Remove the current SQLAlchemy Session after each request..
+    Remove the current SQLAlchemy Session after each request.
+
+    Args:
+    self: The Flash application context.
     """
     storage.close()
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    """Handles 404 errors for page not found."""
+    """
+    Handles 404 errors for page not found.
+
+    Args:
+    error: The error object.
+
+    Returns:
+    A JSON response with the error message and status code 404.
+    """
     data = {"error": "Not found"}
     return jsonify(data), 404
 

@@ -1,6 +1,10 @@
 #!/usr/bin/python3
+"""
+Initializes the blueprint for API.
 
-"""initializes the blueprint for API"""
+This module initializes the Flask blueprint for version 1 of the API,
+defining the URL prefix and importing all view modules for the API endpoints.
+"""
 
 from flask import Blueprint
 
