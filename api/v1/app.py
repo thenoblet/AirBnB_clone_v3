@@ -1,5 +1,11 @@
 #!/usr/bin/python3
-"""App routing module for all APIs in the flask app """
+"""
+App routing module for all APIs in the Flask app.
+
+This module initializes the Flask application, registers the necessary
+blueprints, handles teardown of the application context, and defines error
+handlers for the app.
+"""
 
 import os
 from flask import Flask, jsonify
