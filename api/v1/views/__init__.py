@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """initializes the blueprint for API"""
 
 from flask import Blueprint
